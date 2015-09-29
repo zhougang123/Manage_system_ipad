@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 qfpay. All rights reserved.
 //
 
-#define LabelTag 400
+#define LabelTag 1001
 
 #import "MainViewController.h"
 #import "BetButton.h"
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     for (int i = 0 ; i < 20 ; i ++) {
         BetButton *button = [[BetButton alloc]initWithFrame:CGRectMake(leftMargin + i%4*(margin + buttonWidth) , CGRectGetMaxY(hederView.frame) + topMargin + i/4*(topMargin + buttonHeight), buttonWidth, buttonHeight)];
     
-        button.tag = 1001 + i;
+        button.tag = LabelTag + i;
         
         button.betTypeLabel.text = [button.betmodel.betType betTypeForBetTypeID:button.tag];
         
