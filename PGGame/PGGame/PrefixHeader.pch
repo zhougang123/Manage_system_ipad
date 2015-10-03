@@ -15,8 +15,10 @@
 #import "PGDefines.h"
 #import "BetButton.h"
 #import "BetModel.h"
-#import "GMNetWorking.h"
+#import "PGUser.h"
 
+#import "GMNetWorking.h"
+#import <SVProgressHUD.h>
 
 
 

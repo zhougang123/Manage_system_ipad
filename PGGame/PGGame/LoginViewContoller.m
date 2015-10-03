@@ -9,6 +9,8 @@
 #import "LoginViewContoller.h"
 #import "MainViewController.h"
 
+#define KdemoUserName @"pg001"
+#define KdemoPassWord @"111111"
 
 @interface LoginViewContoller ()<UITextFieldDelegate>
 {
@@ -52,9 +54,14 @@
     passwordLb.text = @"密码";
     passwordLb.font = [UIFont systemFontOfSize:10 * BILI_WIDTH];
     
+    
     //textield
     userNameTf = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMidX(userNameLb.frame) + 10 * BILI_WIDTH, 0, 250 *BILI_WIDTH, CGRectGetHeight(userNameLb.frame))];
     passwordTf = [[UITextField alloc]initWithFrame:CGRectMake(userNameTf.frame.origin.x, passwordLb.frame.origin.y, userNameTf.frame.size.width, userNameTf.frame.size.height)];
+    
+    //=======
+    userNameTf.text = KdemoUserName;
+    passwordTf.text = KdemoPassWord;
     
     userNameTf.delegate = self;
     passwordTf.delegate = self;
@@ -63,6 +70,8 @@
     userNameTf.clearButtonMode = UITextFieldViewModeWhileEditing;
     passwordTf.clearButtonMode = UITextFieldViewModeWhileEditing;
     passwordTf.secureTextEntry = YES;
+    
+//    hud = [[SVProgressHUD alloc]init];
     
     [contentView addSubview:lineView];
     [contentView addSubview:userNameLb];
@@ -86,11 +95,40 @@
 //登陆按钮点击
 - (void)loginButtonAction{
     NSLog(@"登陆");
+    
+    [SVProgressHUD show];
+    
+    WS(weakself);
+    [GMNetWorking loginWithUserName:userNameTf.text andPassword:passwordTf.text completion:^(id obj) {
+        
+        [SVProgressHUD showInfoWithStatus:@"登陆成功"];
+        
+        PGUser *user = obj;
+        if (user.isFirstLogin) {
+            
+            
+        }else{
+            MainViewController *maiViewC = [[MainViewController alloc]init];
+            
+            UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:maiViewC];
+            
+            [weakself.navigationController presentViewController:mainNavi animated:YES completion:nil];
+        }
+        
+        
+        
+        
+    } fail:^(NSString *error) {
+        [SVProgressHUD showErrorWithStatus:error];
+        
+    }];
+    
     MainViewController *maiViewC = [[MainViewController alloc]init];
     
     UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:maiViewC];
     
-    [self.navigationController presentViewController:mainNavi animated:YES completion:nil];
+    [weakself.navigationController presentViewController:mainNavi animated:YES completion:nil];
+    
 }
 
 

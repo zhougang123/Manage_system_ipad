@@ -10,4 +10,6 @@
 
 @interface JsonParser : NSObject
 
++ (PGUser *)parserUserDic:(NSDictionary *)userDic;
+
 @end

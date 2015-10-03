@@ -34,6 +34,8 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     BetButton *selectedBetButton;//选中的下注按钮(下注类型、赔率、酒水、酒水数量)
     UIButton *maskButton;//阴影按钮（tableView阴影背景）
     UITableView *tableListView;//列表（桌信息列表、下注列表）
+    
+    UILabel *drinksNumLabel;//计数label
 }
 
 @property (nonatomic ,strong)NSMutableArray *deskInfoArray;
@@ -144,7 +146,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 - (UIButton *)createMaskBut{
     UIButton *maskBut = [UIButton buttonWithType:UIButtonTypeCustom];
-    [maskBut addTarget:self action:@selector(hiddenList:) forControlEvents:UIControlEventTouchUpInside];
+    [maskBut addTarget:self action:@selector(hiddenList) forControlEvents:UIControlEventTouchUpInside];
     maskBut.frame = self.view.frame;
     maskBut.backgroundColor = [UIColor blackColor];
     maskBut.alpha = 0.5;
@@ -158,18 +160,23 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 - (void)updateBetButton:(BetButton *)but{
     
-    if (but.selected) {
+    but.betmodel.drinksNumber = [NSNumber numberWithInteger:[drinksNumLabel.text integerValue]];
+    
+    if ([but.betmodel.drinksNumber intValue]==0) {
+        
         [but setBackgroundImage:[UIImage imageNamed:@"jincai_button_default"] forState:UIControlStateNormal];
         but.betTypeLabel.textColor = TextGrayColor;
         but.oddsLabel.textColor = TextRedColor;
 
+
     }else{
-       [but setBackgroundImage:[UIImage imageNamed:@"jincai_button_press"] forState:UIControlStateNormal];
+        
+        [but setBackgroundImage:[UIImage imageNamed:@"jincai_button_press"] forState:UIControlStateNormal];
         but.betTypeLabel.textColor = [UIColor whiteColor];
         but.oddsLabel.textColor = [UIColor whiteColor];
     }
     
-    but.selected = !but.isSelected;
+   
 }
 
 
@@ -180,7 +187,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
    
     selectedBetButton = button;
     [self showTableViewListWithType:TableViewType_BetInfo];
-    [self updateBetButton:button];
+//    [self updateBetButton:button];
 }
 
 
@@ -195,6 +202,57 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 //点击了竞猜历史按钮
 - (void)historyButtonAction:(UIButton *)but{
     
+}
+
+//点击了阴影按钮
+- (void)hiddenList{
+    
+    CGRect frame = tableListView.frame;
+    frame.origin.y = SCREEN_HEIGHT;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        tableListView.frame = frame;
+        maskButton.alpha = 0;
+        
+    } completion:^(BOOL finished) {
+        maskButton.hidden = YES;
+    }];
+    
+}
+
+//点击了列表里面-
+- (void)deleteButtonAction{
+    
+    NSInteger number = [drinksNumLabel.text integerValue];
+    if (number <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"已经不能再减少了哦 - -!"];
+        return;
+    }
+    
+//    selectedBetButton.betmodel.drinksNumber = [NSNumber numberWithInteger:number - 1];
+    drinksNumLabel.text = [[NSNumber numberWithInteger:number - 1] description];
+    
+}
+
+//点击了列表里面的+
+- (void)addbuttonAction{
+    
+    NSInteger number = [drinksNumLabel.text integerValue];
+    if (number >= 99) {
+        [SVProgressHUD showErrorWithStatus:@"已经投得够多了哦 - -!"];
+        return;
+    }
+    
+//    selectedBetButton.betmodel.drinksNumber = [NSNumber numberWithInteger:number + 1];
+    drinksNumLabel.text = [[NSNumber numberWithInteger:number + 1] description];
+    
+    
+}
+
+//点击了列表里的确定按钮
+- (void)confirmButtonAction{
+    [self updateBetButton:selectedBetButton];
+    [self hiddenList];
 }
 
 
@@ -219,27 +277,91 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     }];
 }
 
-//点击了阴影按钮
-- (void)hiddenList:(UIButton *)deskBut{
+//配置选择桌信息HederView
+- (void)configurationDeskTableHederView:(UIView *)hederView{
     
-    CGRect frame = tableListView.frame;
-    frame.origin.y = SCREEN_HEIGHT;
+    CGFloat labelW = SCREEN_WIDTH / 3;
+    UILabel *deskNumberLb = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelW, TableViewCellHeight)];
+    deskNumberLb.textAlignment = NSTextAlignmentCenter;
+    deskNumberLb.font = [UIFont systemFontOfSize:TableViewCellFontSize];
     
-    [UIView animateWithDuration:0.25 animations:^{
-        tableListView.frame = frame;
-        maskButton.alpha = 0;
-        
-    } completion:^(BOOL finished) {
-        maskButton.hidden = YES;
-    }];
+    UILabel *jialiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deskNumberLb.frame), 0, labelW, TableViewCellHeight)];
+    jialiLabel.textAlignment = NSTextAlignmentCenter;
+    jialiLabel.font = [UIFont systemFontOfSize:TableViewCellFontSize];
+    
+    UILabel *managerNumberLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(jialiLabel.frame), 0, labelW, TableViewCellHeight)];
+    managerNumberLb.textAlignment = NSTextAlignmentCenter;
+    managerNumberLb.font = [UIFont systemFontOfSize:TableViewCellFontSize];
+    
+    deskNumberLb.text = @"桌号";
+    jialiLabel.text = @"佳丽";
+    managerNumberLb.text = @"客户经理";
+    
+    [hederView addSubview:deskNumberLb];
+    [hederView addSubview:jialiLabel];
+    [hederView addSubview:managerNumberLb];
+
     
 }
 
+//配置下注HederView
+- (void)configurationBetTableHederView:(UIView *)hederView{
+    
+    CGFloat buttonTopMargin = 8 * BILI_WIDTH;
+    UIButton *deletebutton = [[UIButton alloc]initWithFrame:CGRectMake(10 *BILI_WIDTH, buttonTopMargin, 14 *BILI_WIDTH, 14 * BILI_WIDTH)];
+    [deletebutton setBackgroundImage:[UIImage imageNamed:@"jiushui_icon_-"] forState:UIControlStateNormal];
+    [deletebutton addTarget:self action:@selector(deleteButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    drinksNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deletebutton.frame)+ 10 * BILI_WIDTH, 10, 40 * BILI_WIDTH, TableViewCellHeight - 21)];
+    drinksNumLabel.text = [selectedBetButton.betmodel.drinksNumber description];
+    drinksNumLabel.textAlignment = NSTextAlignmentCenter;
+    drinksNumLabel.font = [UIFont systemFontOfSize:10 *BILI_WIDTH];
+    drinksNumLabel.layer.borderWidth = 1.0;
+    drinksNumLabel.layer.borderColor = UIColorFromRGB(0xe0e0e0).CGColor;
+    
+    UIButton *addButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(drinksNumLabel.frame) + 10 *BILI_WIDTH, buttonTopMargin, CGRectGetWidth(deletebutton.frame), CGRectGetHeight(deletebutton.frame))];
+    [addButton setBackgroundImage:[UIImage imageNamed:@"jiushui_icon_+"] forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(addbuttonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *oddsLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(addButton.frame) +15*BILI_WIDTH, 10, 70 *BILI_WIDTH, TableViewCellHeight -21)];
+    NSString *betType = [selectedBetButton.betmodel.betType betTypeForBetTypeID:selectedBetButton.tag];
+    oddsLabel.text = [NSString stringWithFormat:@"%@ (%@)",betType,selectedBetButton.betmodel.odds];
+    oddsLabel.textColor = UIColorFromRGB(0xffa30b);
+    oddsLabel.font = [UIFont systemFontOfSize:8 *BILI_WIDTH];
+    oddsLabel.textAlignment = NSTextAlignmentCenter;
+    oddsLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    
+    
+    UIButton* cancelButton = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - CGRectGetWidth(drinksNumLabel.frame)*2 - 8*BILI_WIDTH - 10, 10,CGRectGetWidth(drinksNumLabel.frame), CGRectGetHeight(drinksNumLabel.frame))];
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    cancelButton.titleLabel.font = [UIFont systemFontOfSize:10 *BILI_WIDTH];
+    [cancelButton setTitleColor:UIColorFromRGB(0x545454) forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(hiddenList) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setBackgroundColor:UIColorFromRGB(0xe0e0e0)];
+    cancelButton.layer.cornerRadius = 8.0;
+    
+    UIButton *domeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(cancelButton.frame) + 8 *BILI_WIDTH, 10, CGRectGetWidth(cancelButton.frame), CGRectGetHeight(cancelButton.frame))];
+    
+    [domeButton setTitle:@"确定" forState:UIControlStateNormal];
+    [domeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [domeButton setBackgroundColor:UIColorFromRGB(0xffa30b)];
+    [domeButton addTarget:self action:@selector(confirmButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    domeButton.layer.cornerRadius = 8.0;
+    
+    [hederView addSubview:domeButton];
+    [hederView addSubview:cancelButton];
+    [hederView addSubview:oddsLabel];
+    [hederView addSubview:addButton];
+    [hederView addSubview:drinksNumLabel];
+    [hederView addSubview:deletebutton];
+}
+
+
 - (void)getList{
     
-    [GMNetWorking getDeskListWithTimeout:15 CallBack:^(id obj) {
+    [GMNetWorking getDeskListWithTimeout:15 completion:^(id obj) {
         
-    } AndErrorString:^(NSString *error) {
+    } fail:^(NSString *error) {
         
     }];
 }
@@ -312,10 +434,11 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
         deskNumberLb.text = deskinfo.deskNumber;
         jialiLabel.text = deskinfo.jiali;
         NSString *manager = deskinfo.manager;
-        managerNumberLb.text = @"0121";
+        managerNumberLb.text = manager;
 
         
     }else{
+        
         cell.textLabel.font = [UIFont systemFontOfSize:TableViewCellFontSize];
         cell.textLabel.text = self.betInfoArray[indexPath.row];
     }
@@ -327,39 +450,21 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *hederView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TableViewCellHeight)];
+    UIView *hederView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TableViewCellHeight+1)];
     hederView.backgroundColor = [UIColor whiteColor];
     if (tableView.tag == TableViewType_DeskInfo) {
         //选择桌信息列表
-        CGFloat labelW = SCREEN_WIDTH / 3;
-        UILabel *deskNumberLb = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelW, TableViewCellHeight)];
-        deskNumberLb.textAlignment = NSTextAlignmentCenter;
-        deskNumberLb.font = [UIFont systemFontOfSize:TableViewCellFontSize];
+        [self configurationDeskTableHederView:hederView];
         
-        UILabel *jialiLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deskNumberLb.frame), 0, labelW, TableViewCellHeight)];
-        jialiLabel.textAlignment = NSTextAlignmentCenter;
-        jialiLabel.font = [UIFont systemFontOfSize:TableViewCellFontSize];
-        
-        UILabel *managerNumberLb = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(jialiLabel.frame), 0, labelW, TableViewCellHeight)];
-        managerNumberLb.textAlignment = NSTextAlignmentCenter;
-        managerNumberLb.font = [UIFont systemFontOfSize:TableViewCellFontSize];
-        
-        deskNumberLb.text = @"桌号";
-        jialiLabel.text = @"佳丽";
-        managerNumberLb.text = @"客户经理";
-        
-        [hederView addSubview:deskNumberLb];
-        [hederView addSubview:jialiLabel];
-        [hederView addSubview:managerNumberLb];
     }else{
-        UILabel *lable = [[UILabel alloc]init];
-        lable.frame = hederView.frame;
-        lable.text = @"我是下注列表头";
-        lable.textAlignment = NSTextAlignmentCenter;
-        lable.font = [UIFont systemFontOfSize:TableViewCellFontSize];
-        [hederView addSubview:lable];
+        [self configurationBetTableHederView:hederView];
+        
     }
     
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, TableViewCellHeight, SCREEN_WIDTH, 1)];
+    lineView.backgroundColor = UIColorFromRGB(0xd0d0d0);
+    [hederView addSubview:lineView];
     
     return hederView;
 }
@@ -395,7 +500,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 }
 
 - (NSMutableArray *)betInfoArray{
-    if (_betInfoArray) {
+    if (!_betInfoArray) {
         _betInfoArray = [@[@"黄鸡礼炮",@"XO",@"威士忌",@"贵州茅台",@"五粮液"] mutableCopy];
     }
     return _betInfoArray;

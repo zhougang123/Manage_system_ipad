@@ -18,6 +18,7 @@
 		986875A91BB67261001FFCEE /* LoginViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A81BB67261001FFCEE /* LoginViewContoller.m */; };
 		986875AC1BB6D1C8001FFCEE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875AB1BB6D1C8001FFCEE /* MainViewController.m */; };
 		986875AF1BB6E882001FFCEE /* BetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875AE1BB6E882001FFCEE /* BetButton.m */; };
+		989C409B1BBBB0520027B457 /* PGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 989C409A1BBBB0520027B457 /* PGUser.m */; };
 		98DA5B681BB8E4B800D08E42 /* Custom.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98DA5B671BB8E4B000D08E42 /* Custom.ttf */; };
 		98DA5B6C1BBA274D00D08E42 /* GMNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 98DA5B6B1BBA274D00D08E42 /* GMNetWorking.m */; };
 		98DA5B711BBA2AC700D08E42 /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 98DA5B701BBA2AC700D08E42 /* JsonParser.m */; };
@@ -59,6 +60,8 @@
 		986875AB1BB6D1C8001FFCEE /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		986875AD1BB6E882001FFCEE /* BetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetButton.h; sourceTree = "<group>"; };
 		986875AE1BB6E882001FFCEE /* BetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetButton.m; sourceTree = "<group>"; };
+		989C40991BBBB0520027B457 /* PGUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGUser.h; sourceTree = "<group>"; };
+		989C409A1BBBB0520027B457 /* PGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGUser.m; sourceTree = "<group>"; };
 		98DA5B671BB8E4B000D08E42 /* Custom.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Custom.ttf; sourceTree = "<group>"; };
 		98DA5B6A1BBA274D00D08E42 /* GMNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMNetWorking.h; sourceTree = "<group>"; };
 		98DA5B6B1BBA274D00D08E42 /* GMNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMNetWorking.m; sourceTree = "<group>"; };
@@ -205,10 +208,20 @@
 		986875A61BB6719F001FFCEE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				989C40981BBBB01F0027B457 /* Models */,
 				986875A71BB67261001FFCEE /* LoginViewContoller.h */,
 				986875A81BB67261001FFCEE /* LoginViewContoller.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		989C40981BBBB01F0027B457 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				989C40991BBBB0520027B457 /* PGUser.h */,
+				989C409A1BBBB0520027B457 /* PGUser.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		98DA5B621BB8DF3C00D08E42 /* Results */ = {
@@ -395,6 +408,7 @@
 				98DA5B741BBA2D5C00D08E42 /* DeskInfoModel.m in Sources */,
 				986875A11BB6450D001FFCEE /* BaseModel.m in Sources */,
 				986875AF1BB6E882001FFCEE /* BetButton.m in Sources */,
+				989C409B1BBBB0520027B457 /* PGUser.m in Sources */,
 				986875A51BB661B9001FFCEE /* BetModel.m in Sources */,
 				98DA5B6C1BBA274D00D08E42 /* GMNetWorking.m in Sources */,
 				98DA5B711BBA2AC700D08E42 /* JsonParser.m in Sources */,
