@@ -26,4 +26,45 @@
     return user;
 }
 
+
+
++(NSMutableArray *)parserBetAndOddsArray:(NSArray *)betArray
+{
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (NSDictionary *dic in betArray) {
+        
+        BetModel * model = [[BetModel alloc]init];
+        model.typeID = [[dic objectForKey:@"id"] integerValue];
+        model.betType = [dic objectForKey:@"name"];
+        
+        model.odds = [NSString stringWithFormat:@"%@:%@",[dic objectForKey:@"numerator"],[dic objectForKey:@"denominator"]];
+        [array addObject:model];
+        
+    }
+    
+    return array;
+}
+
+
+
+
++ (NSMutableArray *)parserDrinksArray:(NSArray *)dataArray{
+    
+    NSMutableArray *drinksArray = [NSMutableArray array];
+    
+    for (NSDictionary *dic in dataArray) {
+        
+        DrinksModel *model = [[DrinksModel alloc]init];
+        model.name = [dic objectForKey:@"name"];
+        model.drinksID = [[dic objectForKey:@"id"] integerValue];
+        model.buyLimit = [[dic objectForKey:@"buyLimit"] integerValue];
+        model.price = [dic objectForKey:@"price"];
+        
+        [drinksArray addObject:model];
+    }
+    
+    return drinksArray;
+}
+
 @end

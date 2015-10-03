@@ -68,42 +68,59 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     self.title = @"酒水竞猜";
    
     UIView *hederView = [self createHederView];
-    maskButton = [self createMaskBut];
-    tableListView = [self createDeskTableView];
     
     CGFloat leftMargin = 10 * BILI_WIDTH;
     CGFloat topMargin = 16 * BILI_WIDTH;
     CGFloat margin = 18 * BILI_WIDTH;
     CGFloat buttonWidth = (SCREEN_WIDTH - (leftMargin * 2 +margin * 3))/4;
     CGFloat buttonHeight = 30 * BILI_WIDTH;
-    //创建投注按钮
-    for (int i = 0 ; i < 20 ; i ++) {
-        BetButton *button = [[BetButton alloc]initWithFrame:CGRectMake(leftMargin + i%4*(margin + buttonWidth) , CGRectGetMaxY(hederView.frame) + topMargin + i/4*(topMargin + buttonHeight), buttonWidth, buttonHeight)];
     
-        button.tag = LabelTag + i;
+    WS(weakself);
+    [SVProgressHUD show];
+    [GMNetWorking getBetTypeAndOddsListWithTimeout:15 completion:^(id obj) {
         
-        button.betTypeLabel.text = [button.betmodel.betType betTypeForBetTypeID:button.tag];
+        //创建投注按钮
+        [SVProgressHUD showSuccessWithStatus:@"加载完成"];
+        for (int i = 0 ; i < [obj count] ; i ++) {
+            BetButton *button = [[BetButton alloc]initWithFrame:CGRectMake(leftMargin + i%4*(margin + buttonWidth) , CGRectGetMaxY(hederView.frame) + topMargin + i/4*(topMargin + buttonHeight), buttonWidth, buttonHeight)];
+            
+            BetModel *model = obj[i];
+            button.betmodel = model;
+            button.betTypeLabel.text = model.betType;
+            button.oddsLabel.text = model.odds;
+            
+            [button setBackgroundImage:[UIImage imageNamed:@"jincai_button_default"] forState:UIControlStateNormal];
+            [button addTarget:weakself action:@selector(betButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+            [weakself.view addSubview:button];
+            [weakself.view addSubview:button.betTypeLabel];
+            [weakself.view addSubview:button.oddsLabel];
+        }
         
-        [button setBackgroundImage:[UIImage imageNamed:@"jincai_button_default"] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(betButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:button];
-        [self.view addSubview:button.betTypeLabel];
-        [self.view addSubview:button.oddsLabel];
-    }
+        
+        CGFloat confirmButWidth = 150 *BILI_WIDTH;
+        CGFloat confirmButHeight = 25 *BILI_WIDTH;
+        UIButton *confirm = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - confirmButWidth)/2, SCREEN_HEIGHT - confirmButHeight - 10 *BILI_WIDTH , confirmButWidth, confirmButHeight)];
+        [confirm setBackgroundImage:[UIImage imageNamed:@"jingcai_button_submita"] forState:UIControlStateNormal];
+        [confirm setTitle:@"确定竞猜" forState:UIControlStateNormal];
+        confirm.titleLabel.font = [UIFont systemFontOfSize:9 * BILI_WIDTH];
+        [confirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        maskButton = [self createMaskBut];
+        tableListView = [self createDeskTableView];
+        
+        
+        [self.view addSubview:confirm];
+        [self.view addSubview:hederView];
+        [self.view addSubview:maskButton];
+        [self.view addSubview:tableListView];
+        [self.view bringSubviewToFront:tableListView];
+        
+    } fail:^(NSString *error) {
+        
+        [SVProgressHUD showErrorWithStatus:error];
+    }];
     
-    CGFloat confirmButWidth = 150 *BILI_WIDTH;
-    CGFloat confirmButHeight = 25 *BILI_WIDTH;
-    UIButton *confirm = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH - confirmButWidth)/2, SCREEN_HEIGHT - confirmButHeight - 10 *BILI_WIDTH , confirmButWidth, confirmButHeight)];
-    [confirm setBackgroundImage:[UIImage imageNamed:@"jingcai_button_submita"] forState:UIControlStateNormal];
-    [confirm setTitle:@"确定竞猜" forState:UIControlStateNormal];
-    confirm.titleLabel.font = [UIFont systemFontOfSize:9 * BILI_WIDTH];
-    [confirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    
-    [self.view addSubview:confirm];
-    [self.view addSubview:hederView];
-    [self.view addSubview:maskButton];
-    [self.view addSubview:tableListView];
 
     
 }
@@ -314,6 +331,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     
     drinksNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deletebutton.frame)+ 10 * BILI_WIDTH, 10, 40 * BILI_WIDTH, TableViewCellHeight - 21)];
     drinksNumLabel.text = [selectedBetButton.betmodel.drinksNumber description];
+    drinksNumLabel.text == nil? drinksNumLabel.text = @"0":nil;
     drinksNumLabel.textAlignment = NSTextAlignmentCenter;
     drinksNumLabel.font = [UIFont systemFontOfSize:10 *BILI_WIDTH];
     drinksNumLabel.layer.borderWidth = 1.0;
@@ -324,7 +342,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     [addButton addTarget:self action:@selector(addbuttonAction) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *oddsLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(addButton.frame) +15*BILI_WIDTH, 10, 70 *BILI_WIDTH, TableViewCellHeight -21)];
-    NSString *betType = [selectedBetButton.betmodel.betType betTypeForBetTypeID:selectedBetButton.tag];
+    NSString *betType = selectedBetButton.betmodel.betType;
     oddsLabel.text = [NSString stringWithFormat:@"%@ (%@)",betType,selectedBetButton.betmodel.odds];
     oddsLabel.textColor = UIColorFromRGB(0xffa30b);
     oddsLabel.font = [UIFont systemFontOfSize:8 *BILI_WIDTH];
@@ -359,11 +377,22 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 - (void)getList{
     
+    WS(weakself);
     [GMNetWorking getDeskListWithTimeout:15 completion:^(id obj) {
         
     } fail:^(NSString *error) {
         
     }];
+    
+    [GMNetWorking getDrinksListWithTimeout:15 completion:^(id obj) {
+        
+        weakself.betInfoArray = obj;
+        [tableListView reloadData];
+        
+    } fail:^(NSString *error) {
+        
+    }];
+    
 }
 
 
@@ -440,7 +469,8 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     }else{
         
         cell.textLabel.font = [UIFont systemFontOfSize:TableViewCellFontSize];
-        cell.textLabel.text = self.betInfoArray[indexPath.row];
+        DrinksModel *model = self.betInfoArray[indexPath.row];
+        cell.textLabel.text = model.name;
     }
     
     
@@ -499,12 +529,6 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     return _deskInfoArray;
 }
 
-- (NSMutableArray *)betInfoArray{
-    if (!_betInfoArray) {
-        _betInfoArray = [@[@"黄鸡礼炮",@"XO",@"威士忌",@"贵州茅台",@"五粮液"] mutableCopy];
-    }
-    return _betInfoArray;
-}
 
 /*
 #pragma mark - Navigation

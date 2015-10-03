@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "DrinksModel.h"
 
 @class BetTypeSourceModel;
 
@@ -39,9 +40,9 @@ typedef NS_ENUM(NSUInteger, BetTypeID) {
 
 @property (nonatomic , strong)NSString *odds;//赔率
 
-@property (nonatomic , strong)BetTypeSourceModel *betType;//押注类型
-@property (nonatomic , assign)BetTypeID typeID;
-@property (nonatomic , strong)NSString *drinksName; //下注酒水的名字
+@property (nonatomic , strong)NSString *betType;//押注类型
+@property (nonatomic , assign)NSInteger typeID;
+@property (nonatomic , strong)DrinksModel* drinksModel;
 @property (nonatomic , strong)NSNumber *drinksNumber;//下注酒水数量
 
 @end
@@ -53,10 +54,4 @@ typedef NS_ENUM(NSUInteger, BetTypeID) {
 
 
 
-@interface BetTypeSourceModel : BaseModel
 
-
-+ (instancetype)shared;
-- (NSString *)betTypeForBetTypeID:(NSInteger )betTypeID;
-
-@end

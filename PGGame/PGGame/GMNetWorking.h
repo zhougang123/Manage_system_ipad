@@ -15,8 +15,11 @@ typedef void (^ErrorString)(NSString* error);
 
 #define APIaddress  @"http://123.57.237.43:8080/api"//接口主路径
 
-#define APIdeskList @"/desk/list"  //桌信息（桌号、佳丽、客户经理）
-#define APIlogin    @"/user/login"
+#define APIdeskList   @"/desk/list"  //桌信息（桌号、佳丽、客户经理）
+#define APIlogin      @"/user/login"
+#define APIodds       @"/odds/list" //获取竞猜类型、赔率列表
+#define APIdrinksList @"/drink/list"//酒水列表
+
 
 @interface GMNetWorking : NSObject
 
@@ -48,7 +51,26 @@ typedef void (^ErrorString)(NSString* error);
 
 
 
+/**
+ *  获取赔率列表
+ *
+ *  @param timeout     超时
+ *  @param callBack    返回数据
+ *  @param errorString 错误描述
+ */
++ (void)getBetTypeAndOddsListWithTimeout:(NSTimeInterval)timeout completion:(callBack)callBack fail:(ErrorString)errorString;
 
+
+
+
+/**
+ *  获取酒水列表
+ *
+ *  @param timeout     超时
+ *  @param callBack    返回数据
+ *  @param errorString 错误描述
+ */
++ (void)getDrinksListWithTimeout:(NSTimeInterval)timeout completion:(callBack)callBack fail:(ErrorString)errorString;
 
 
 

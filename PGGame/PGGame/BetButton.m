@@ -28,14 +28,14 @@
         self.betTypeLabel.textAlignment = NSTextAlignmentCenter;
         self.betTypeLabel.textColor = TextGrayColor;
         
-        self.oddsLabel.text = @"1:20";
+//        self.oddsLabel.text = @"1:20";
         [self.oddsLabel setTextColor:TextRedColor];
         self.oddsLabel.font = [UIFont fontWithName:@"BigYoungMediumGB2.0" size:22];
         self.oddsLabel.textAlignment = NSTextAlignmentCenter;
         
         
-        self.betmodel = [[BetModel alloc]init];
-        self.betmodel.drinksNumber = [NSNumber numberWithInteger:0];
+//        self.betmodel = [[BetModel alloc]init];
+//        self.betmodel.drinksNumber = [NSNumber numberWithInteger:0];
         
     }
     

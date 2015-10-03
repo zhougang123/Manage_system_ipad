@@ -16,6 +16,7 @@
 #import "BetButton.h"
 #import "BetModel.h"
 #import "PGUser.h"
+#import "DrinksModel.h"
 
 #import "GMNetWorking.h"
 #import <SVProgressHUD.h>

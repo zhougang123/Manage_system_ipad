@@ -12,4 +12,10 @@
 
 + (PGUser *)parserUserDic:(NSDictionary *)userDic;
 
+
++ (NSMutableArray *)parserBetAndOddsArray:(NSArray *)betArray;
+
+
++ (NSMutableArray *)parserDrinksArray:(NSArray *)dataArray;
+
 @end
