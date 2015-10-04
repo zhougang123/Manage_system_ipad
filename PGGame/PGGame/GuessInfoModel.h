@@ -14,6 +14,6 @@
 @property (nonatomic, strong) NSString *drinkNum;
 @property (nonatomic, strong) NSString *drinkID;
 @property (nonatomic, strong) NSString *drinkName;
-
+@property (nonatomic, strong) BetModel *betModel;
 
 @end

@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GuessSureAlertViewDelegate <NSObject>
+
+- (void)guessSureAlertSubmitToServer;
+
+@end
+
+
 @interface GuessSureAlertView : UIView
 
 
+@property (nonatomic, weak)id<GuessSureAlertViewDelegate>delegate;
 
 - (id)initWithGuessArray:(NSArray *)infoArray;
 
