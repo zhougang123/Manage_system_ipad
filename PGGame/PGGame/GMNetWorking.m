@@ -262,6 +262,38 @@
 
 
 
+
++ (void)getHistoryListWithTimeout:(NSTimeInterval)timeout completion:(callBack)callBack fail:(ErrorString)errorString{
+    NSString *path = [APIaddress stringByAppendingString:APIhistoryGuessOrder];
+    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    AFHTTPRequestOperationManager *manager = [self getManagerWithTimeout:timeout];
+    
+    [manager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"历史竞猜列表:/n%@",responseObject);
+        
+        
+        NSInteger respondCode = [[responseObject objectForKey:@"code"] integerValue];
+        if (respondCode == 200) {
+            //成功
+           
+            callBack([responseObject objectForKey:@"data"]);
+            
+        }else{
+            //失败
+            errorString([responseObject objectForKey:@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"fail 历史竞猜列表:%@",[error description]);
+        errorString(@"网络不好,请稍后再试");
+        
+    }];
+}
+
+
+
 + (AFHTTPRequestOperationManager *)getManagerWithTimeout:(NSTimeInterval)secennd{
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

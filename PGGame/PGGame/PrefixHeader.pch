@@ -23,5 +23,6 @@
 #import "AppDelegate.h"
 #import "GuessSureAlertView.h"
 
+#import "NSDictionary+PGDictionary.h"
 
 #endif

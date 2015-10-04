@@ -12,6 +12,7 @@
 #import "BetButton.h"
 #import "DeskInfoModel.h"
 #import "GuessInfoModel.h"
+#import "HIstoryListTableViewController.h"
 
 
 #define TableViewCellHeight 30 * BILI_WIDTH
@@ -523,6 +524,9 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 //点击了竞猜历史按钮
 - (void)historyButtonAction:(UIButton *)but{
     
+    HIstoryListTableViewController *historyVC = [[HIstoryListTableViewController alloc]init];
+    historyVC.title = @"竞猜历史";
+    [self.navigationController pushViewController:historyVC animated:YES];
 }
 
 //点击了阴影按钮

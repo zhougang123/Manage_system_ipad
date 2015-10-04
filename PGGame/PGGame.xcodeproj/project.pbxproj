@@ -7,23 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		045322801BBFCE8300792D78 /* DeskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453227F1BBFCE8300792D78 /* DeskModel.m */; settings = {ASSET_TAGS = (); }; };
-		0453229D1BC0B80D00792D78 /* jincai_icon_jiali@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045322971BC0B80D00792D78 /* jincai_icon_jiali@2x.png */; settings = {ASSET_TAGS = (); }; };
-		0453229E1BC0B80D00792D78 /* jincai_icon_jiali@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045322981BC0B80D00792D78 /* jincai_icon_jiali@3x.png */; settings = {ASSET_TAGS = (); }; };
-		0453229F1BC0B80D00792D78 /* jincai_icon_jiuzhuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045322991BC0B80D00792D78 /* jincai_icon_jiuzhuo@2x.png */; settings = {ASSET_TAGS = (); }; };
-		045322A01BC0B80D00792D78 /* jincai_icon_jiuzhuo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0453229A1BC0B80D00792D78 /* jincai_icon_jiuzhuo@3x.png */; settings = {ASSET_TAGS = (); }; };
-		045322A11BC0B80D00792D78 /* jincai_icon_manager@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0453229B1BC0B80D00792D78 /* jincai_icon_manager@2x.png */; settings = {ASSET_TAGS = (); }; };
-		045322A21BC0B80D00792D78 /* jincai_icon_manager@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0453229C1BC0B80D00792D78 /* jincai_icon_manager@3x.png */; settings = {ASSET_TAGS = (); }; };
+		045322801BBFCE8300792D78 /* DeskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0453227F1BBFCE8300792D78 /* DeskModel.m */; };
+		0453229D1BC0B80D00792D78 /* jincai_icon_jiali@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045322971BC0B80D00792D78 /* jincai_icon_jiali@2x.png */; };
+		0453229E1BC0B80D00792D78 /* jincai_icon_jiali@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045322981BC0B80D00792D78 /* jincai_icon_jiali@3x.png */; };
+		0453229F1BC0B80D00792D78 /* jincai_icon_jiuzhuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 045322991BC0B80D00792D78 /* jincai_icon_jiuzhuo@2x.png */; };
+		045322A01BC0B80D00792D78 /* jincai_icon_jiuzhuo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0453229A1BC0B80D00792D78 /* jincai_icon_jiuzhuo@3x.png */; };
+		045322A11BC0B80D00792D78 /* jincai_icon_manager@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0453229B1BC0B80D00792D78 /* jincai_icon_manager@2x.png */; };
+		045322A21BC0B80D00792D78 /* jincai_icon_manager@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0453229C1BC0B80D00792D78 /* jincai_icon_manager@3x.png */; };
 		045D24F11BB4E03F0084A11E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D24F01BB4E03F0084A11E /* main.m */; };
 		045D24F41BB4E03F0084A11E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D24F31BB4E03F0084A11E /* AppDelegate.m */; };
 		045D24FC1BB4E03F0084A11E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045D24FB1BB4E03F0084A11E /* Images.xcassets */; };
 		045D24FF1BB4E03F0084A11E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045D24FD1BB4E03F0084A11E /* LaunchScreen.xib */; };
 		045D250B1BB4E03F0084A11E /* PGGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D250A1BB4E03F0084A11E /* PGGameTests.m */; };
-		04D3547E1BC0D85F00AEB71D /* GuessInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3547D1BC0D85F00AEB71D /* GuessInfoModel.m */; settings = {ASSET_TAGS = (); }; };
-		04D354811BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3547F1BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png */; settings = {ASSET_TAGS = (); }; };
-		04D354821BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */; settings = {ASSET_TAGS = (); }; };
-		04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */; settings = {ASSET_TAGS = (); }; };
+		04D3547E1BC0D85F00AEB71D /* GuessInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3547D1BC0D85F00AEB71D /* GuessInfoModel.m */; };
+		04D354811BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3547F1BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png */; };
+		04D354821BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */; };
+		04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */; };
 		789BF59AC0A506FC6B6F29F5 /* libPods-PGGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1524A5D234E14FFC24BA109F /* libPods-PGGame.a */; };
+		982C51F61BC117B500365E03 /* NSDictionary+PGDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 982C51F51BC117B500365E03 /* NSDictionary+PGDictionary.m */; };
+		982C51FC1BC1185E00365E03 /* HIstoryListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 982C51FB1BC1185E00365E03 /* HIstoryListTableViewController.m */; };
+		982C51FF1BC119AB00365E03 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 982C51FE1BC119AB00365E03 /* HistoryTableViewCell.m */; };
+		982C52021BC1368000365E03 /* PGCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 982C52011BC1368000365E03 /* PGCustomView.m */; };
 		986875A11BB6450D001FFCEE /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A01BB6450D001FFCEE /* BaseModel.m */; };
 		986875A51BB661B9001FFCEE /* BetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A41BB661B9001FFCEE /* BetModel.m */; };
 		986875A91BB67261001FFCEE /* LoginViewContoller.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A81BB67261001FFCEE /* LoginViewContoller.m */; };
@@ -74,6 +78,14 @@
 		04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessSureAlertView.m; sourceTree = "<group>"; };
 		1524A5D234E14FFC24BA109F /* libPods-PGGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PGGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8591CB1853A7CC4EDB312ABA /* Pods-PGGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PGGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-PGGame/Pods-PGGame.release.xcconfig"; sourceTree = "<group>"; };
+		982C51F41BC117B500365E03 /* NSDictionary+PGDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+PGDictionary.h"; sourceTree = "<group>"; };
+		982C51F51BC117B500365E03 /* NSDictionary+PGDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+PGDictionary.m"; sourceTree = "<group>"; };
+		982C51FA1BC1185E00365E03 /* HIstoryListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIstoryListTableViewController.h; sourceTree = "<group>"; };
+		982C51FB1BC1185E00365E03 /* HIstoryListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIstoryListTableViewController.m; sourceTree = "<group>"; };
+		982C51FD1BC119AB00365E03 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
+		982C51FE1BC119AB00365E03 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
+		982C52001BC1368000365E03 /* PGCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGCustomView.h; sourceTree = "<group>"; };
+		982C52011BC1368000365E03 /* PGCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGCustomView.m; sourceTree = "<group>"; };
 		986875991BB642BB001FFCEE /* PGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PGDefines.h; sourceTree = "<group>"; };
 		9868759F1BB6450D001FFCEE /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		986875A01BB6450D001FFCEE /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
@@ -181,9 +193,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		982C51F21BC1176800365E03 /* HistoryList */ = {
+			isa = PBXGroup;
+			children = (
+				982C51FA1BC1185E00365E03 /* HIstoryListTableViewController.h */,
+				982C51FB1BC1185E00365E03 /* HIstoryListTableViewController.m */,
+				982C51FD1BC119AB00365E03 /* HistoryTableViewCell.h */,
+				982C51FE1BC119AB00365E03 /* HistoryTableViewCell.m */,
+				982C52001BC1368000365E03 /* PGCustomView.h */,
+				982C52011BC1368000365E03 /* PGCustomView.m */,
+			);
+			name = HistoryList;
+			sourceTree = "<group>";
+		};
+		982C51F31BC1179C00365E03 /* Expand */ = {
+			isa = PBXGroup;
+			children = (
+				982C51F41BC117B500365E03 /* NSDictionary+PGDictionary.h */,
+				982C51F51BC117B500365E03 /* NSDictionary+PGDictionary.m */,
+			);
+			name = Expand;
+			sourceTree = "<group>";
+		};
 		9868759A1BB642F7001FFCEE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				982C51F31BC1179C00365E03 /* Expand */,
+				982C51F21BC1176800365E03 /* HistoryList */,
 				9868759B1BB64327001FFCEE /* MainList */,
 				98DA5B6D1BBA2A7700D08E42 /* Utils */,
 				98DA5B691BBA26FE00D08E42 /* NetWork */,
@@ -457,9 +493,13 @@
 			files = (
 				98CF4D991BBFAD8900CA7521 /* DrinksModel.m in Sources */,
 				986875A91BB67261001FFCEE /* LoginViewContoller.m in Sources */,
+				982C51FF1BC119AB00365E03 /* HistoryTableViewCell.m in Sources */,
+				982C52021BC1368000365E03 /* PGCustomView.m in Sources */,
 				986875AC1BB6D1C8001FFCEE /* MainViewController.m in Sources */,
 				04D3547E1BC0D85F00AEB71D /* GuessInfoModel.m in Sources */,
 				045322801BBFCE8300792D78 /* DeskModel.m in Sources */,
+				982C51F61BC117B500365E03 /* NSDictionary+PGDictionary.m in Sources */,
+				982C51FC1BC1185E00365E03 /* HIstoryListTableViewController.m in Sources */,
 				98DA5B741BBA2D5C00D08E42 /* DeskInfoModel.m in Sources */,
 				986875A11BB6450D001FFCEE /* BaseModel.m in Sources */,
 				04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */,

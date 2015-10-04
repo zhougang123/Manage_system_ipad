@@ -77,4 +77,9 @@ typedef void (^ErrorString)(NSString* error);
 
 
 
+
+
++ (void)getHistoryListWithTimeout:(NSTimeInterval)timeout completion:(callBack)callBack fail:(ErrorString)errorString;
+
+
 @end
