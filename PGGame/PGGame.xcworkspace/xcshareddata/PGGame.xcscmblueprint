@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C1F7939C9E304095D3AE2470E906423765C8E948+++CF3290B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C1F7939C9E304095D3AE2470E906423765C8E948+++1573B61" : 0,
+    "C1F7939C9E304095D3AE2470E906423765C8E948+++CF3290B" : 0,
+    "C1F7939C9E304095D3AE2470E906423765C8E948+++0DB49B3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "407B3D0E-837A-444A-A95E-AF52E0C35F55",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C1F7939C9E304095D3AE2470E906423765C8E948+++1573B61" : "",
+    "C1F7939C9E304095D3AE2470E906423765C8E948+++CF3290B" : "Manage_system_ipad\/",
+    "C1F7939C9E304095D3AE2470E906423765C8E948+++0DB49B3" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PGGame",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PGGame\/PGGame.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhougang123\/Manage_system_ipad.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C1F7939C9E304095D3AE2470E906423765C8E948+++0DB49B3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhougang123\/Manage_system_ipad.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C1F7939C9E304095D3AE2470E906423765C8E948+++1573B61"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zhougang123\/Manage_system_ipad.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C1F7939C9E304095D3AE2470E906423765C8E948+++CF3290B"
+    }
+  ]
+}

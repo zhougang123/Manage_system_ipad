@@ -18,7 +18,7 @@
 
 typedef NS_ENUM(NSUInteger, TableViewType) {
     TableViewType_DeskInfo,
-    TableViewType_BetInfo,
+    TableViewType_BetInfo//酒水
 };
 
 typedef NS_ENUM(NSUInteger, CellLabelSType) {
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 };
 
 
-@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
     DeskInfoModel *selectedDeskInfo;//选中的桌信息(桌号、佳丽、客户经理)
     BetButton *selectedBetButton;//选中的下注按钮(下注类型、赔率、酒水、酒水数量)
@@ -40,17 +40,198 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 @property (nonatomic ,strong)NSMutableArray *deskInfoArray;
 @property (nonatomic ,strong)NSMutableArray *betInfoArray;
+@property (nonatomic ,strong)NSMutableArray *managerInfoArray;
+
+@property (nonatomic, strong)UIToolbar  *toolBar;
+@property (nonatomic, strong)UIPickerView *deskPickerView;
+@property (nonatomic, strong)UIPickerView *beautyPickerView;
+@property (nonatomic, strong)UIPickerView *managerPickerView;
+
+@property (nonatomic, strong)UITextField *selectDeskTF;
+@property (nonatomic, strong)UITextField *selectBeautyTF;
+@property (nonatomic, strong)UITextField *selectManagerTF;
+@property (nonatomic, strong)UIButton    *deskButton;
+@property (nonatomic, strong)UIButton    *beautyButton;
+@property (nonatomic, strong)UIButton    *managerButton;
+
+
+@property (nonatomic, strong)NSMutableArray *drinkArray;
+
 
 @end
 
 @implementation MainViewController
+- (UIPickerView *)deskPickerView
+{
+    if (_deskPickerView == nil) {
+        _deskPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 216)];
+        _deskPickerView.delegate = self;
+        _deskPickerView.dataSource = self;
+        _deskPickerView.tag = 10000;
+    }
+    return _deskPickerView;
+    
+}
+- (UIPickerView *)beautyPickerView
+{
+    if (_beautyPickerView == nil) {
+        _beautyPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 216)];
+        _beautyPickerView.delegate = self;
+        _beautyPickerView.dataSource = self;
+        _beautyPickerView.tag = 20000;
+    }
+    return _beautyPickerView;
+}
+- (UIPickerView *)managerPickerView
+{
+    if (_managerPickerView == nil) {
+        _managerPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 216)];
+        _managerPickerView.delegate = self;
+        _managerPickerView.dataSource = self;
+        _managerPickerView.tag = 30000;
+    }
+    return _managerPickerView;
+}
+//返回显示的列数
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
 
+//返回当前列显示的行数
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    
+    NSInteger rows = 0;
+    switch (pickerView.tag) {
+        case 10000:
+            rows = [self.deskInfoArray count];
+            break;
+        case 20000:
+            rows = [self.betInfoArray count];
+            break;
+        case 30000:
+            rows = [self.managerInfoArray count];
+            break;
+        default:
+            break;
+    }
+    return rows;
+}
+
+//每行显示的文字样式
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+
+{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 107, 30)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont systemFontOfSize:14 * BILI_WIDTH];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    
+    NSString *rowTitle = nil;
+    
+    switch (pickerView.tag) {
+        case 10000:
+            rowTitle = self.deskInfoArray[row][@"name"];
+            break;
+        case 20000:
+            rowTitle = self.betInfoArray[row][@"workNumber"];
+            break;
+        case 30000:
+            rowTitle = self.managerInfoArray[row][@"workNumber"];
+            break;
+        default:
+            break;
+    }
+    titleLabel.text = rowTitle;
+    return titleLabel;
+    
+}
+
+
+- (UIToolbar *)toolBar
+{
+    if (_toolBar == nil) {
+        _toolBar = [[ UIToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30 * BILI_WIDTH)];
+        _toolBar.barStyle = UIBarStyleDefault;
+        
+
+        
+        UIBarButtonItem *doneButton   = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(surePickerAction)];
+        UIBarButtonItem *cancleButton = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelPickerAction)];
+        
+        UIBarButtonItem *titleButton = [[UIBarButtonItem alloc] initWithTitle:@"选择房间信息"
+                                                                        style:UIBarButtonItemStylePlain
+                                                                       target:nil
+                                                                       action:nil];
+        titleButton.tintColor = [UIColor lightGrayColor];
+        
+        UIBarButtonItem *spaceButton1  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                       target:nil
+                                                                                       action:nil];
+        UIBarButtonItem *spaceButton2  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                       target:nil
+                                                                                       action:nil];
+        
+        [_toolBar setItems:@[cancleButton, spaceButton1 ,titleButton, spaceButton2, doneButton]];
+    }
+    return _toolBar;
+}
+- (void)surePickerAction{
+    if ([self.selectDeskTF isFirstResponder]) {
+        NSInteger row1 = [self.deskPickerView selectedRowInComponent:0];
+        [self.deskButton setTitle:self.deskInfoArray[row1][@"name"] forState:UIControlStateNormal];
+    }
+    if ([self.selectBeautyTF isFirstResponder]) {
+        NSInteger row2 = [self.beautyPickerView selectedRowInComponent:0];
+        [self.beautyButton setTitle:self.betInfoArray[row2][@"workNumber"] forState:UIControlStateNormal];
+
+
+    }
+    if ([self.selectManagerTF isFirstResponder]) {
+        NSInteger row3 = [self.managerPickerView selectedRowInComponent:0];
+        [self.managerButton setTitle:self.managerInfoArray[row3][@"workNumber"] forState:UIControlStateNormal];
+
+    }
+    
+    [self.selectDeskTF resignFirstResponder];
+    [self.selectBeautyTF resignFirstResponder];
+    [self.selectManagerTF resignFirstResponder];
+}
+- (void)cancelPickerAction
+{
+    [self.selectDeskTF resignFirstResponder];
+    [self.selectBeautyTF resignFirstResponder];
+    [self.selectManagerTF resignFirstResponder];
+
+}
 #pragma mark - configur UI
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.deskInfoArray = [[NSMutableArray alloc] init];
+    self.betInfoArray = [[NSMutableArray alloc] init];
+    self.managerInfoArray = [[NSMutableArray alloc] init];
+    self.drinkArray = [[NSMutableArray alloc] init];
+    
+    
+    self.selectDeskTF = [[UITextField alloc] initWithFrame:CGRectZero];
+    self.selectDeskTF.inputView = self.deskPickerView;
+    self.selectDeskTF.inputAccessoryView = self.toolBar;
+    
+    self.selectBeautyTF = [[UITextField alloc] initWithFrame:CGRectZero];
+    self.selectBeautyTF.inputView = self.beautyPickerView;
+    self.selectBeautyTF.inputAccessoryView = self.toolBar;
+    
+    self.selectManagerTF = [[UITextField alloc] initWithFrame:CGRectZero];
+    self.selectManagerTF.inputView = self.managerPickerView;
+    self.selectManagerTF.inputAccessoryView = self.toolBar;
+    
+    
+    [self.view addSubview:self.selectDeskTF];
+    [self.view addSubview:self.selectBeautyTF];
+    [self.view addSubview:self.selectManagerTF];
+    
     [self createUI];
-    [self getList];
     
 }
 
@@ -62,8 +243,6 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 - (void)createUI{
     
-    
-//    self.view.backgroundColor = UIColorFromRGB(0xf0f0f0);
     self.view.backgroundColor = [UIColor lightGrayColor];
     self.title = @"酒水竞猜";
    
@@ -120,21 +299,118 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithCustomView:historyBut];
     self.navigationItem.rightBarButtonItem = item;
     
-    CGFloat hederViewHeight = 42 * BILI_WIDTH;
-    UIView *hederView = [[UIView alloc]initWithFrame:CGRectMake(0, 68 , SCREEN_WIDTH, hederViewHeight)];
+    CGFloat hederViewHeight = 44 * BILI_WIDTH;
+    UIView *hederView = [[UIView alloc]initWithFrame:CGRectMake(0, STATUS_AND_NAVI_BAR , SCREEN_WIDTH, hederViewHeight)];
     hederView.backgroundColor = [UIColor whiteColor];
     //创建hederView按钮
     
-    UIButton *hederButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(hederView.frame), CGRectGetHeight(hederView.frame))];
-    [hederButton addTarget:self action:@selector(hederButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    [hederView addSubview:hederButton];
-
+    CGFloat width = SCREEN_WIDTH/3.0;
+    UIImageView *deskIcon = [[UIImageView alloc] initWithFrame:CGRectMake(30 , 15 * BILI_WIDTH, 14 * BILI_WIDTH, 14 * BILI_WIDTH)];
+    [deskIcon setImage:[UIImage imageNamed:@"jincai_icon_jiuzhuo"]];
     
+    
+    self.deskButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(deskIcon.frame), 7 * BILI_WIDTH, width - 20 * BILI_WIDTH - 30 * BILI_WIDTH, 30 * BILI_WIDTH)];
+    self.deskButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.deskButton.layer.borderWidth = 1.0;
+    [self.deskButton setTitle:@"桌号" forState:UIControlStateNormal];
+    [self.deskButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.deskButton addTarget:self action:@selector(deskButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *beautyIcon = [[UIImageView alloc] initWithFrame:CGRectMake(30 + width, 15 * BILI_WIDTH, 14 * BILI_WIDTH, 14 * BILI_WIDTH)];
+    [beautyIcon setImage:[UIImage imageNamed:@"jincai_icon_jiali"]];
+    
+    self.beautyButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(beautyIcon.frame), 7 * BILI_WIDTH, width - 20 * BILI_WIDTH - 30 * BILI_WIDTH, 30 * BILI_WIDTH)];
+    self.beautyButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.beautyButton.layer.borderWidth = 1.0;
+    [self.beautyButton setTitle:@"佳丽" forState:UIControlStateNormal];
+    [self.beautyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.beautyButton addTarget:self action:@selector(beautyButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImageView *managerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(30 + width*2.0, 15 * BILI_WIDTH, 14 * BILI_WIDTH, 14 * BILI_WIDTH)];
+    [managerIcon setImage:[UIImage imageNamed:@"jincai_icon_manager"]];
+    
+    self.managerButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(managerIcon.frame), 7 * BILI_WIDTH, width - 20 * BILI_WIDTH - 30 * BILI_WIDTH, 30 * BILI_WIDTH)];
+    self.managerButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.managerButton.layer.borderWidth = 1.0;
+    [self.managerButton setTitle:@"经理" forState:UIControlStateNormal];
+    [self.managerButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.managerButton addTarget:self action:@selector(managerButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [hederView addSubview:deskIcon];
+    [hederView addSubview:self.deskButton];
+    
+    [hederView addSubview:beautyIcon];
+    [hederView addSubview:self.beautyButton];
+    
+    [hederView addSubview:managerIcon];
+    [hederView addSubview:self.managerButton];
     return hederView;
     
 }
+- (void)deskButtonAction{
+    
+    WS(weakSelf);
+    
+    [GMNetWorking getDeskListWithTimeout:30 completion:^(id respDesk) {
+        NSDictionary *resDictDesk = (NSDictionary *)respDesk;
+        if ([resDictDesk count] > 0) {
+            NSArray *desks = resDictDesk[@"data"];
+            [weakSelf.deskInfoArray removeAllObjects];
+            [weakSelf.deskInfoArray addObjectsFromArray:desks];
+            [weakSelf.selectDeskTF becomeFirstResponder];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"未获取到桌号列表"];
+        }
+        
+    } fail:^(NSString *error) {
+        [SVProgressHUD showErrorWithStatus:error.lowercaseString];
+        
+    }];
 
+    
+    
+}
+- (void)beautyButtonAction{
+    WS(weakSelf);
+    [GMNetWorking getBeautyListWithTimeout:30 completion:^(id respBeauty) {
+        NSDictionary *resDictBeauty = (NSDictionary *)respBeauty;
+        if ([resDictBeauty count] > 0) {
+            NSArray *brauties = resDictBeauty[@"data"];
+            [weakSelf.betInfoArray removeAllObjects];
+            [weakSelf.betInfoArray addObjectsFromArray:brauties];
+            
+            [weakSelf.selectBeautyTF becomeFirstResponder];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"未获取到佳丽列表"];
+        }
+    } fail:^(NSString *error) {
+        [SVProgressHUD showErrorWithStatus:error.lowercaseString];
+    }];
 
+    
+
+}
+- (void)managerButtonAction{
+    WS(weakSelf);
+    [GMNetWorking getManagerListWithTimeout:30.0 completion:^(id respManager) {
+        NSDictionary *resDictManager = (NSDictionary *)respManager;
+        if ([resDictManager count] > 0) {
+            NSArray *managers = resDictManager[@"data"];
+            [weakSelf.managerInfoArray removeAllObjects];
+            [weakSelf.managerInfoArray addObjectsFromArray:managers];
+            
+            
+            [self.selectManagerTF becomeFirstResponder];
+
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"未获取到经理列表"];
+        }
+    } fail:^(NSString *error) {
+        [SVProgressHUD showErrorWithStatus:error.lowercaseString];
+    }];
+    
+
+}
 - (UITableView *)createDeskTableView{
     UITableView *deskTabV = [[UITableView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 160 * BILI_WIDTH) style:UITableViewStylePlain];
     deskTabV.tableFooterView = [[UIView alloc]init];
@@ -186,16 +462,30 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 - (void)betButtonAction:(BetButton *)button{
    
     selectedBetButton = button;
-    [self showTableViewListWithType:TableViewType_BetInfo];
+    [GMNetWorking getDrinkListWithTimeout:30 completion:^(id obj) {
+        NSDictionary *dict = (NSDictionary *)obj;
+        if ([dict count] > 0) {
+            [self.drinkArray removeAllObjects];
+            NSArray *drinks = dict[@"data"];
+            if ([drinks count] > 0) {
+                [self.drinkArray addObjectsFromArray:drinks];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"没有获取到酒水信息"];
+            }
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"没有获取到酒水信息"];
+        }
+    } fail:^(NSString *error) {
+        [SVProgressHUD showErrorWithStatus:error.lowercaseString];
+
+    }];
+    
+    
+    
+//    [self showTableViewListWithType:TableViewType_BetInfo];
 //    [self updateBetButton:button];
 }
 
-
-//点击了头部按钮
-- (void)hederButtonAction{
-    NSLog(@"选择佳丽");
-    [self showTableViewListWithType:TableViewType_DeskInfo];
-}
 
 
 
@@ -357,15 +647,6 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 }
 
 
-- (void)getList{
-    
-    [GMNetWorking getDeskListWithTimeout:15 completion:^(id obj) {
-        
-    } fail:^(NSString *error) {
-        
-    }];
-}
-
 
 #pragma  mark - tableViewMethon
 
@@ -379,7 +660,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
         row = self.deskInfoArray.count;
     }else{
         //选择下注酒水
-        row = self.betInfoArray.count;
+        row = self.drinkArray.count;
     }
     
     return row;
@@ -440,7 +721,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     }else{
         
         cell.textLabel.font = [UIFont systemFontOfSize:TableViewCellFontSize];
-        cell.textLabel.text = self.betInfoArray[indexPath.row];
+        cell.textLabel.text = self.drinkArray[indexPath.row][@"name"];
     }
     
     
@@ -483,28 +764,28 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 
 
-//======================
-- (NSMutableArray *)deskInfoArray{
-    if (!_deskInfoArray) {
-        _deskInfoArray = [NSMutableArray array];
-        for (int i = 0; i < 20; i ++) {
-            DeskInfoModel *model = [[DeskInfoModel alloc]init];
-            model.deskNumber = [NSString stringWithFormat:@"%@",@(i+15)];
-            model.jiali = [NSString stringWithFormat:@"%@",@(i + 9660)];
-            model.manager = [NSString stringWithFormat:@"0%@",@(i + 121)];
-            [_deskInfoArray addObject:model];
-        }
-    }
-    
-    return _deskInfoArray;
-}
-
-- (NSMutableArray *)betInfoArray{
-    if (!_betInfoArray) {
-        _betInfoArray = [@[@"黄鸡礼炮",@"XO",@"威士忌",@"贵州茅台",@"五粮液"] mutableCopy];
-    }
-    return _betInfoArray;
-}
+////======================
+//- (NSMutableArray *)deskInfoArray{
+//    if (!_deskInfoArray) {
+//        _deskInfoArray = [NSMutableArray array];
+//        for (int i = 0; i < 20; i ++) {
+//            DeskInfoModel *model = [[DeskInfoModel alloc]init];
+//            model.deskNumber = [NSString stringWithFormat:@"%@",@(i+15)];
+//            model.jiali = [NSString stringWithFormat:@"%@",@(i + 9660)];
+//            model.manager = [NSString stringWithFormat:@"0%@",@(i + 121)];
+//            [_deskInfoArray addObject:model];
+//        }
+//    }
+//    
+//    return _deskInfoArray;
+//}
+//
+//- (NSMutableArray *)betInfoArray{
+//    if (!_betInfoArray) {
+//        _betInfoArray = [@[@"黄鸡礼炮",@"XO",@"威士忌",@"贵州茅台",@"五粮液"] mutableCopy];
+//    }
+//    return _betInfoArray;
+//}
 
 /*
 #pragma mark - Navigation
