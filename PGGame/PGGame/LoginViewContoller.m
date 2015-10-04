@@ -25,6 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createUI];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,6 +95,12 @@
 
 //登陆按钮点击
 - (void)loginButtonAction{
+    
+    
+    
+    
+    
+
     NSLog(@"登陆");
     
     [SVProgressHUD show];
@@ -105,7 +112,6 @@
         
         PGUser *user = obj;
         if (user.isFirstLogin) {
-            
             
         }else{
             MainViewController *maiViewC = [[MainViewController alloc]init];
@@ -123,11 +129,11 @@
         
     }];
     
-    MainViewController *maiViewC = [[MainViewController alloc]init];
-    
-    UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:maiViewC];
-    
-    [weakself.navigationController presentViewController:mainNavi animated:YES completion:nil];
+//    MainViewController *maiViewC = [[MainViewController alloc]init];
+//    
+//    UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:maiViewC];
+//    
+//    [weakself.navigationController presentViewController:mainNavi animated:YES completion:nil];
     
 }
 

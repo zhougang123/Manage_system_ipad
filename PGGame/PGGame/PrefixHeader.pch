@@ -16,10 +16,12 @@
 #import "BetButton.h"
 #import "BetModel.h"
 #import "PGUser.h"
+#import "DrinksModel.h"
 
 #import "GMNetWorking.h"
 #import <SVProgressHUD.h>
-
+#import "AppDelegate.h"
+#import "GuessSureAlertView.h"
 
 
 #endif

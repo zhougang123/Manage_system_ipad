@@ -19,6 +19,10 @@
 		045D24FC1BB4E03F0084A11E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045D24FB1BB4E03F0084A11E /* Images.xcassets */; };
 		045D24FF1BB4E03F0084A11E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045D24FD1BB4E03F0084A11E /* LaunchScreen.xib */; };
 		045D250B1BB4E03F0084A11E /* PGGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 045D250A1BB4E03F0084A11E /* PGGameTests.m */; };
+		04D3547E1BC0D85F00AEB71D /* GuessInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3547D1BC0D85F00AEB71D /* GuessInfoModel.m */; settings = {ASSET_TAGS = (); }; };
+		04D354811BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3547F1BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png */; settings = {ASSET_TAGS = (); }; };
+		04D354821BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */; settings = {ASSET_TAGS = (); }; };
+		04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */; settings = {ASSET_TAGS = (); }; };
 		789BF59AC0A506FC6B6F29F5 /* libPods-PGGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1524A5D234E14FFC24BA109F /* libPods-PGGame.a */; };
 		986875A11BB6450D001FFCEE /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A01BB6450D001FFCEE /* BaseModel.m */; };
 		986875A51BB661B9001FFCEE /* BetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A41BB661B9001FFCEE /* BetModel.m */; };
@@ -26,6 +30,7 @@
 		986875AC1BB6D1C8001FFCEE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875AB1BB6D1C8001FFCEE /* MainViewController.m */; };
 		986875AF1BB6E882001FFCEE /* BetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875AE1BB6E882001FFCEE /* BetButton.m */; };
 		989C409B1BBBB0520027B457 /* PGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 989C409A1BBBB0520027B457 /* PGUser.m */; };
+		98CF4D991BBFAD8900CA7521 /* DrinksModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CF4D981BBFAD8900CA7521 /* DrinksModel.m */; };
 		98DA5B681BB8E4B800D08E42 /* Custom.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98DA5B671BB8E4B000D08E42 /* Custom.ttf */; };
 		98DA5B6C1BBA274D00D08E42 /* GMNetWorking.m in Sources */ = {isa = PBXBuildFile; fileRef = 98DA5B6B1BBA274D00D08E42 /* GMNetWorking.m */; };
 		98DA5B711BBA2AC700D08E42 /* JsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 98DA5B701BBA2AC700D08E42 /* JsonParser.m */; };
@@ -61,6 +66,12 @@
 		045D25041BB4E03F0084A11E /* PGGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PGGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		045D25091BB4E03F0084A11E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		045D250A1BB4E03F0084A11E /* PGGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PGGameTests.m; sourceTree = "<group>"; };
+		04D3547C1BC0D85F00AEB71D /* GuessInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessInfoModel.h; sourceTree = "<group>"; };
+		04D3547D1BC0D85F00AEB71D /* GuessInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessInfoModel.m; sourceTree = "<group>"; };
+		04D3547F1BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiushui_icon_xuanz@2x.png"; sourceTree = "<group>"; };
+		04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiushui_icon_xuanz@3x.png"; sourceTree = "<group>"; };
+		04D3548C1BC10EE600AEB71D /* GuessSureAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessSureAlertView.h; sourceTree = "<group>"; };
+		04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessSureAlertView.m; sourceTree = "<group>"; };
 		1524A5D234E14FFC24BA109F /* libPods-PGGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PGGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8591CB1853A7CC4EDB312ABA /* Pods-PGGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PGGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-PGGame/Pods-PGGame.release.xcconfig"; sourceTree = "<group>"; };
 		986875991BB642BB001FFCEE /* PGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PGDefines.h; sourceTree = "<group>"; };
@@ -77,6 +88,8 @@
 		986875AE1BB6E882001FFCEE /* BetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetButton.m; sourceTree = "<group>"; };
 		989C40991BBBB0520027B457 /* PGUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGUser.h; sourceTree = "<group>"; };
 		989C409A1BBBB0520027B457 /* PGUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGUser.m; sourceTree = "<group>"; };
+		98CF4D971BBFAD8900CA7521 /* DrinksModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrinksModel.h; sourceTree = "<group>"; };
+		98CF4D981BBFAD8900CA7521 /* DrinksModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrinksModel.m; sourceTree = "<group>"; };
 		98DA5B671BB8E4B000D08E42 /* Custom.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Custom.ttf; sourceTree = "<group>"; };
 		98DA5B6A1BBA274D00D08E42 /* GMNetWorking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMNetWorking.h; sourceTree = "<group>"; };
 		98DA5B6B1BBA274D00D08E42 /* GMNetWorking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMNetWorking.m; sourceTree = "<group>"; };
@@ -188,6 +201,8 @@
 				0453229A1BC0B80D00792D78 /* jincai_icon_jiuzhuo@3x.png */,
 				0453229B1BC0B80D00792D78 /* jincai_icon_manager@2x.png */,
 				0453229C1BC0B80D00792D78 /* jincai_icon_manager@3x.png */,
+				04D3547F1BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png */,
+				04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */,
 				9868759E1BB64393001FFCEE /* Models */,
 				9868759D1BB64388001FFCEE /* Views */,
 				9868759C1BB6436D001FFCEE /* Contollers */,
@@ -200,6 +215,8 @@
 			children = (
 				986875AA1BB6D1C8001FFCEE /* MainViewController.h */,
 				986875AB1BB6D1C8001FFCEE /* MainViewController.m */,
+				04D3548C1BC10EE600AEB71D /* GuessSureAlertView.h */,
+				04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */,
 			);
 			name = Contollers;
 			sourceTree = "<group>";
@@ -222,6 +239,10 @@
 				986875A41BB661B9001FFCEE /* BetModel.m */,
 				98DA5B721BBA2D5C00D08E42 /* DeskInfoModel.h */,
 				98DA5B731BBA2D5C00D08E42 /* DeskInfoModel.m */,
+				98CF4D971BBFAD8900CA7521 /* DrinksModel.h */,
+				98CF4D981BBFAD8900CA7521 /* DrinksModel.m */,
+				04D3547C1BC0D85F00AEB71D /* GuessInfoModel.h */,
+				04D3547D1BC0D85F00AEB71D /* GuessInfoModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -375,6 +396,8 @@
 			files = (
 				0453229F1BC0B80D00792D78 /* jincai_icon_jiuzhuo@2x.png in Resources */,
 				98DA5B681BB8E4B800D08E42 /* Custom.ttf in Resources */,
+				04D354811BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png in Resources */,
+				04D354821BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png in Resources */,
 				045D24FF1BB4E03F0084A11E /* LaunchScreen.xib in Resources */,
 				0453229E1BC0B80D00792D78 /* jincai_icon_jiali@3x.png in Resources */,
 				045322A01BC0B80D00792D78 /* jincai_icon_jiuzhuo@3x.png in Resources */,
@@ -432,11 +455,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98CF4D991BBFAD8900CA7521 /* DrinksModel.m in Sources */,
 				986875A91BB67261001FFCEE /* LoginViewContoller.m in Sources */,
 				986875AC1BB6D1C8001FFCEE /* MainViewController.m in Sources */,
+				04D3547E1BC0D85F00AEB71D /* GuessInfoModel.m in Sources */,
 				045322801BBFCE8300792D78 /* DeskModel.m in Sources */,
 				98DA5B741BBA2D5C00D08E42 /* DeskInfoModel.m in Sources */,
 				986875A11BB6450D001FFCEE /* BaseModel.m in Sources */,
+				04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */,
 				986875AF1BB6E882001FFCEE /* BetButton.m in Sources */,
 				989C409B1BBBB0520027B457 /* PGUser.m in Sources */,
 				986875A51BB661B9001FFCEE /* BetModel.m in Sources */,

@@ -15,3 +15,4 @@
 
 @end
 
+extern AppDelegate *shareAppDelegate;

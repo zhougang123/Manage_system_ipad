@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LoginViewContoller.h"
 
+AppDelegate *shareAppDelegate = nil;
 @interface AppDelegate ()
 
 @end
@@ -18,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     LoginViewContoller *loginVC = [[LoginViewContoller alloc] init];
@@ -25,6 +27,9 @@
     UINavigationController *navigation = [[UINavigationController alloc]initWithRootViewController:loginVC];
     
     self.window.rootViewController= navigation;
+    
+    
+    shareAppDelegate = self;
     [self.window makeKeyAndVisible];
     
     return YES;
