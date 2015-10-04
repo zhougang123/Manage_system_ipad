@@ -897,20 +897,20 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     
     for (GuessInfoModel *model in self.containerGuessArray) {
         NSMutableDictionary *guessDict = [[NSMutableDictionary alloc] init];
-        [paramDict setValue:model.oddsID forKey:@"oddsId"];
-        [paramDict setValue:model.drinkNum forKey:@"drinkNum"];
-        [paramDict setValue:model.drinkID forKey:@"drinkId"];
-//        [guessArray addObject:guessDict];
+        [guessDict setValue:model.oddsID forKey:@"oddsId"];
+        [guessDict setValue:model.drinkNum forKey:@"drinkNum"];
+        [guessDict setValue:model.drinkID forKey:@"drinkId"];
+        [guessArray addObject:guessDict];
     }
     
     
     
-//    [paramDict setValue:guessArray forKey:@"orderDetailVoList"];
+    [paramDict setValue:guessArray forKey:@"orderDetailVoList"];
     
     
     NSString *josn =[self dictionaryToJson:paramDict];
     
-    [GMNetWorking submitGuessToServer:paramDict completion:^(id obj) {
+    [GMNetWorking submitGuessToServer:@{@"orderDetailVoList":josn} completion:^(id obj) {
         
     } fail:^(NSString *error) {
         
