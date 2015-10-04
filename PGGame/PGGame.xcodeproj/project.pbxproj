@@ -23,6 +23,7 @@
 		04D354811BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3547F1BC0E03A00AEB71D /* jiushui_icon_xuanz@2x.png */; settings = {ASSET_TAGS = (); }; };
 		04D354821BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */; settings = {ASSET_TAGS = (); }; };
 		04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */; settings = {ASSET_TAGS = (); }; };
+		04D354941BC1300B00AEB71D /* ModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D354931BC1300B00AEB71D /* ModifyPwdViewController.m */; settings = {ASSET_TAGS = (); }; };
 		789BF59AC0A506FC6B6F29F5 /* libPods-PGGame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1524A5D234E14FFC24BA109F /* libPods-PGGame.a */; };
 		986875A11BB6450D001FFCEE /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A01BB6450D001FFCEE /* BaseModel.m */; };
 		986875A51BB661B9001FFCEE /* BetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 986875A41BB661B9001FFCEE /* BetModel.m */; };
@@ -72,6 +73,8 @@
 		04D354801BC0E03A00AEB71D /* jiushui_icon_xuanz@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiushui_icon_xuanz@3x.png"; sourceTree = "<group>"; };
 		04D3548C1BC10EE600AEB71D /* GuessSureAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuessSureAlertView.h; sourceTree = "<group>"; };
 		04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuessSureAlertView.m; sourceTree = "<group>"; };
+		04D354921BC1300B00AEB71D /* ModifyPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyPwdViewController.h; sourceTree = "<group>"; };
+		04D354931BC1300B00AEB71D /* ModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyPwdViewController.m; sourceTree = "<group>"; };
 		1524A5D234E14FFC24BA109F /* libPods-PGGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PGGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8591CB1853A7CC4EDB312ABA /* Pods-PGGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PGGame.release.xcconfig"; path = "Pods/Target Support Files/Pods-PGGame/Pods-PGGame.release.xcconfig"; sourceTree = "<group>"; };
 		986875991BB642BB001FFCEE /* PGDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PGDefines.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				986875AB1BB6D1C8001FFCEE /* MainViewController.m */,
 				04D3548C1BC10EE600AEB71D /* GuessSureAlertView.h */,
 				04D3548D1BC10EE600AEB71D /* GuessSureAlertView.m */,
+				04D354921BC1300B00AEB71D /* ModifyPwdViewController.h */,
+				04D354931BC1300B00AEB71D /* ModifyPwdViewController.m */,
 			);
 			name = Contollers;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				04D3547E1BC0D85F00AEB71D /* GuessInfoModel.m in Sources */,
 				045322801BBFCE8300792D78 /* DeskModel.m in Sources */,
 				98DA5B741BBA2D5C00D08E42 /* DeskInfoModel.m in Sources */,
+				04D354941BC1300B00AEB71D /* ModifyPwdViewController.m in Sources */,
 				986875A11BB6450D001FFCEE /* BaseModel.m in Sources */,
 				04D3548E1BC10EE600AEB71D /* GuessSureAlertView.m in Sources */,
 				986875AF1BB6E882001FFCEE /* BetButton.m in Sources */,

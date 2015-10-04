@@ -36,6 +36,7 @@
 
 - (void)createUI{
     
+    
     self.view.backgroundColor = UIColorFromRGB(0xf0f0f0);
     self.title = @"登陆";
     UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 20 * BILI_WIDTH + 64, SCREEN_WIDTH, 50 * BILI_WIDTH +2)];
@@ -113,13 +114,16 @@
         
         PGUser *user = obj;
         if (user.isFirstLogin) {
-            
+            ModifyPwdViewController *modify = [[ModifyPwdViewController alloc] init];
+            modify.user = user;
+            [weakself.navigationController pushViewController:modify animated:YES];
         }else{
             MainViewController *maiViewC = [[MainViewController alloc]init];
             maiViewC.user = user;
             UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:maiViewC];
             
             [weakself.navigationController presentViewController:mainNavi animated:YES completion:nil];
+            
         }
         
         

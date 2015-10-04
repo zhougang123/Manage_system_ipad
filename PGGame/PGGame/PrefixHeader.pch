@@ -23,6 +23,7 @@
 #import "AppDelegate.h"
 #import "GuessSureAlertView.h"
 #import "GuessInfoModel.h"
+#import "ModifyPwdViewController.h"
 
 
 #endif

@@ -833,15 +833,6 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 
 - (void)sureGuessToServer
 {
-    GuessSureAlertView *alert= [[GuessSureAlertView alloc] initWithGuessArray:self.containerGuessArray];
-    alert.delegate = self;
-    [alert show];
-    
-}
-
-
-- (void)guessSureAlertSubmitToServer
-{
     
     if (self.deskInfoDist == nil) {
         [SVProgressHUD showErrorWithStatus:@"请先选择房间号"];
@@ -863,12 +854,32 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
         [SVProgressHUD showErrorWithStatus:@"请先下注"];
         return;
     }
+
     
+    GuessSureAlertView *alert= [[GuessSureAlertView alloc] initWithGuessArray:self.containerGuessArray];
+    alert.delegate = self;
+    [alert show];
     
+}
+
+- (NSString*)dictionaryToJson:(NSDictionary *)dic
+{
+    
+    NSError *parseError = nil;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+}
+
+
+- (void)guessSureAlertSubmitToServer
+{
     
     NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
     
-//    [paramDict setValue:[] forKey:@"deskId"];
+
     [paramDict setValue:self.deskInfoDist[@"id"] forKey:@"deskId"];
 
     [paramDict setValue:self.beautyInfoDist[@"id"] forKey:@"beautyId"];
@@ -882,13 +893,19 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     
     for (GuessInfoModel *model in self.containerGuessArray) {
         NSMutableDictionary *guessDict = [[NSMutableDictionary alloc] init];
-        [guessDict setValue:model.oddsID forKey:@"oddsId"];
-        [guessDict setValue:model.drinkNum forKey:@"drinkNum"];
-        [guessDict setValue:model.drinkID forKey:@"drinkId"];
-        [guessArray addObject:guessDict];
+        [paramDict setValue:model.oddsID forKey:@"oddsId"];
+        [paramDict setValue:model.drinkNum forKey:@"drinkNum"];
+        [paramDict setValue:model.drinkID forKey:@"drinkId"];
+//        [guessArray addObject:guessDict];
     }
-    [paramDict setValue:guessArray forKey:@"orderDetailVoList"];
-   
+    
+    
+    
+//    [paramDict setValue:guessArray forKey:@"orderDetailVoList"];
+    
+    
+    NSString *josn =[self dictionaryToJson:paramDict];
+    
     [GMNetWorking submitGuessToServer:paramDict completion:^(id obj) {
         
     } fail:^(NSString *error) {

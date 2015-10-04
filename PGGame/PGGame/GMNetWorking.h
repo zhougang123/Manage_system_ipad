@@ -23,6 +23,8 @@ typedef void (^ErrorString)(NSString* error);
 #define APIcancelGuessOrder  @"/order/cancel"  //取消竞猜
 #define APIlogin             @"/user/login"    //登录
 #define APIoddsList          @"/odds/list"     //
+#define APImodifyPassword    @"/user/changePwd"//修改密码
+
 @interface GMNetWorking : NSObject
 
 
@@ -77,4 +79,7 @@ typedef void (^ErrorString)(NSString* error);
 
 
 + (void)submitGuessToServer:(NSDictionary *)param completion:(callBack)callBack fail:(ErrorString)errorString;
+
++ (void)modifPasswordWithTimeout:(NSTimeInterval)timeout password:(NSString *)pwd waiterId:(NSString *)waterId completion:(callBack)callBack fail:(ErrorString)errorString;
+
 @end
