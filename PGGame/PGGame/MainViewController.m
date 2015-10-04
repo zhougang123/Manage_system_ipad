@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 };
 
 
-@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface MainViewController ()<GuessSureAlertViewDelegate, UITableViewDataSource,UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
     DeskInfoModel *selectedDeskInfo;//选中的桌信息(桌号、佳丽、客户经理)
     BetButton *selectedBetButton;//选中的下注按钮(下注类型、赔率、酒水、酒水数量)
@@ -54,6 +54,10 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 @property (nonatomic, strong)UIButton    *deskButton;
 @property (nonatomic, strong)UIButton    *beautyButton;
 @property (nonatomic, strong)UIButton    *managerButton;
+
+@property (nonatomic, strong)NSDictionary *deskInfoDist;
+@property (nonatomic, strong)NSDictionary *beautyInfoDist;
+@property (nonatomic, strong)NSDictionary *manmgerInfoDist;
 
 
 @property (nonatomic, strong)NSMutableArray *drinkArray;
@@ -186,16 +190,18 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     if ([self.selectDeskTF isFirstResponder]) {
         NSInteger row1 = [self.deskPickerView selectedRowInComponent:0];
         [self.deskButton setTitle:self.deskInfoArray[row1][@"name"] forState:UIControlStateNormal];
+        self.deskInfoDist = self.deskInfoArray[row1];
     }
     if ([self.selectBeautyTF isFirstResponder]) {
         NSInteger row2 = [self.beautyPickerView selectedRowInComponent:0];
         [self.beautyButton setTitle:self.betInfoArray[row2][@"workNumber"] forState:UIControlStateNormal];
-
+        self.beautyInfoDist = self.deskInfoArray[row2];
 
     }
     if ([self.selectManagerTF isFirstResponder]) {
         NSInteger row3 = [self.managerPickerView selectedRowInComponent:0];
         [self.managerButton setTitle:self.managerInfoArray[row3][@"workNumber"] forState:UIControlStateNormal];
+        self.manmgerInfoDist = self.deskInfoArray[row3];
 
     }
     
@@ -828,8 +834,69 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 - (void)sureGuessToServer
 {
     GuessSureAlertView *alert= [[GuessSureAlertView alloc] initWithGuessArray:self.containerGuessArray];
-    
+    alert.delegate = self;
     [alert show];
+    
+}
+
+
+- (void)guessSureAlertSubmitToServer
+{
+    
+    if (self.deskInfoDist == nil) {
+        [SVProgressHUD showErrorWithStatus:@"请先选择房间号"];
+        return;
+    }
+    
+    if (self.beautyInfoDist == nil) {
+        [SVProgressHUD showErrorWithStatus:@"请选择佳丽"];
+        return;
+        
+    }
+    
+    if (self.manmgerInfoDist == nil) {
+        [SVProgressHUD showErrorWithStatus:@"请选择经理"];
+        return;
+    }
+    
+    if ([self.containerGuessArray count] <= 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先下注"];
+        return;
+    }
+    
+    
+    
+    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
+    
+//    [paramDict setValue:[] forKey:@"deskId"];
+    [paramDict setValue:self.deskInfoDist[@"id"] forKey:@"deskId"];
+
+    [paramDict setValue:self.beautyInfoDist[@"id"] forKey:@"beautyId"];
+
+    [paramDict setValue:self.manmgerInfoDist[@"id"] forKey:@"managerId"];
+    
+    [paramDict setValue:self.user.userID forKey:@"waiterId"];
+
+    
+    NSMutableArray *guessArray = [[NSMutableArray alloc] init];
+    
+    for (GuessInfoModel *model in self.containerGuessArray) {
+        NSMutableDictionary *guessDict = [[NSMutableDictionary alloc] init];
+        [guessDict setValue:model.oddsID forKey:@"oddsId"];
+        [guessDict setValue:model.drinkNum forKey:@"drinkNum"];
+        [guessDict setValue:model.drinkID forKey:@"drinkId"];
+        [guessArray addObject:guessDict];
+    }
+    [paramDict setValue:guessArray forKey:@"orderDetailVoList"];
+   
+    [GMNetWorking submitGuessToServer:paramDict completion:^(id obj) {
+        
+    } fail:^(NSString *error) {
+        
+    }];
+    
+    
+    
     
 }
 

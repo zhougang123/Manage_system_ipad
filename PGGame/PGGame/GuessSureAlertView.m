@@ -86,6 +86,9 @@
 
 - (void)sureAlertView
 {
+    if ([self.delegate respondsToSelector:@selector(guessSureAlertSubmitToServer)]) {
+        [self.delegate guessSureAlertSubmitToServer];
+    }
     [self dismiss];
 }
 

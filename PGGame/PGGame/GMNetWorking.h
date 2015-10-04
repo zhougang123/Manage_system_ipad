@@ -76,5 +76,5 @@ typedef void (^ErrorString)(NSString* error);
 + (void)getDrinksListWithTimeout:(NSTimeInterval)timeout completion:(callBack)callBack fail:(ErrorString)errorString;
 
 
-
++ (void)submitGuessToServer:(NSDictionary *)param completion:(callBack)callBack fail:(ErrorString)errorString;
 @end

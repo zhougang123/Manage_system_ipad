@@ -116,7 +116,7 @@
             
         }else{
             MainViewController *maiViewC = [[MainViewController alloc]init];
-            
+            maiViewC.user = user;
             UINavigationController *mainNavi = [[UINavigationController alloc]initWithRootViewController:maiViewC];
             
             [weakself.navigationController presentViewController:mainNavi animated:YES completion:nil];

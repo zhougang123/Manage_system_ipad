@@ -259,7 +259,36 @@
 }
 
 
++ (void)submitGuessToServer:(NSDictionary *)param completion:(callBack)callBack fail:(ErrorString)errorString
+{
+    NSString *path = [APIaddress stringByAppendingString:APIsubmitGuessInfo];
+    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    AFHTTPRequestOperationManager *manager = [self getManagerWithTimeout:30];
+    
+    [manager GET:path parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"酒水列表:/n%@",responseObject);
+        
+        
+        NSInteger respondCode = [[responseObject objectForKey:@"code"] integerValue];
+        if (respondCode == 200) {
+            //成功
+            NSArray *drinksArray = [[JsonParser parserDrinksArray:[responseObject objectForKey:@"data"]] mutableCopy];
+            callBack(drinksArray);
+            
+        }else{
+            //失败
+            errorString([responseObject objectForKey:@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"fail 酒水列表:%@",[error description]);
+        errorString(@"网络不好,请稍后再试");
+        
+    }];
 
+}
 
 
 + (AFHTTPRequestOperationManager *)getManagerWithTimeout:(NSTimeInterval)secennd{
