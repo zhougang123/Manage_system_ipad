@@ -22,6 +22,7 @@
 #import <SVProgressHUD.h>
 #import "AppDelegate.h"
 #import "GuessSureAlertView.h"
+#import "GuessInfoModel.h"
 
 
 #endif

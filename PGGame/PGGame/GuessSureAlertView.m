@@ -21,9 +21,9 @@
         self.guessArray = infoArray;
         self.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.4];
         
-        NSInteger rows = [self.guessArray count] > 4 ? 6 : [self.guessArray count] + 2;
+        NSInteger rows = [self.guessArray count] > 3 ? 3 : [self.guessArray count];
         
-        UIView *alertBGView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4.0, (SCREEN_HEIGHT - (60 * rows + 120))/2.0 - 100, SCREEN_WIDTH/2.0, 60 * rows)];
+        UIView *alertBGView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4.0, (SCREEN_HEIGHT - (60 * rows + 120))/2.0 - 100, SCREEN_WIDTH/2.0, 60 * 2 + 90 * rows)];
         alertBGView.backgroundColor = [UIColor whiteColor];
         alertBGView.layer.cornerRadius = 5.0;
         alertBGView.layer.masksToBounds = YES;
@@ -67,10 +67,11 @@
         [footView addSubview:greyLinv];
         [alertBGView addSubview:footView];
         [footView addSubview:greyLinh];
-        self.oddsTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(headLabel.frame), SCREEN_WIDTH/2.0, (rows - 2) * 60) style:UITableViewStylePlain];
+        self.oddsTableview = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(headLabel.frame), SCREEN_WIDTH/2.0, rows * 90) style:UITableViewStylePlain];
         self.oddsTableview.delegate = self;
         self.oddsTableview.dataSource = self;
-        self.oddsTableview.rowHeight = 60;
+        self.oddsTableview.rowHeight = 90;
+        self.oddsTableview.separatorInset = UIEdgeInsetsMake(0, 20, 0, 20);
         self.oddsTableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
         [alertBGView addSubview:self.oddsTableview];
         [self addSubview:alertBGView];
@@ -109,8 +110,20 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
-    cell.textLabel.text = @"1111111";
-    cell.detailTextLabel.text = @"222222";
+    GuessInfoModel *infoModel = self.guessArray[indexPath.row];
+    
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2.0, 45)];
+    label1.textAlignment = NSTextAlignmentCenter;
+    label1.textColor = [UIColor blackColor];
+    label1.text = [NSString stringWithFormat:@"竞猜: %@ %@", infoModel.betModel.betType, infoModel.betModel.odds];
+    
+    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH/2.0, 45)];
+    label2.textAlignment = NSTextAlignmentCenter;
+    label2.textColor = [UIColor blackColor];
+    label2.text = [NSString stringWithFormat:@"投注: %@ %@", infoModel.drinkName, infoModel.drinkNum];
+    [cell.contentView addSubview:label1];
+    [cell.contentView addSubview:label2];
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

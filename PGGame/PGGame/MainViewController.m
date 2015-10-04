@@ -290,6 +290,7 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
         [confirm setTitle:@"确定竞猜" forState:UIControlStateNormal];
         confirm.titleLabel.font = [UIFont systemFontOfSize:9 * BILI_WIDTH];
         [confirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [confirm addTarget:self action:@selector(sureGuessToServer) forControlEvents:UIControlEventTouchUpInside];
         
         maskButton = [self createMaskBut];
         tableListView = [self createDeskTableView];
@@ -486,6 +487,10 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
 - (void)betButtonAction:(BetButton *)button{
    
     WS(weakSelf);
+    selectedBetButton = button;
+    
+    BetModel *betModel = button.betmodel;
+    
     [GMNetWorking getDrinksListWithTimeout:30 completion:^(id obj) {
         
         NSArray *drinks = (NSArray *)obj;
@@ -499,7 +504,8 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
             weakSelf.containerGuessInfo.drinkName = drinkInfo.name;
             weakSelf.containerGuessInfo.oddsID =[NSString stringWithFormat:@"%ld", button.tag];
             weakSelf.containerGuessInfo.drinkNum = @"0";
-            selectedBetButton = button;
+            weakSelf.containerGuessInfo.betModel = betModel;
+            
             
             [tableListView reloadData];
         }else{
@@ -580,9 +586,6 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     }
     [self.containerGuessArray addObject:self.containerGuessInfo];
     self.containerGuessInfo = nil;
-    
-    GuessSureAlertView *alert = [[GuessSureAlertView alloc] initWithGuessArray:self.containerGuessArray];
-    [alert show];
     
     
     [self updateBetButton:selectedBetButton];
@@ -818,6 +821,15 @@ typedef NS_ENUM(NSUInteger, CellLabelSType) {
     [tableListView reloadData];
     DrinksModel *drinkInfo = self.drinkArray[indexPath.row];
     self.containerGuessInfo.drinkID = [NSString stringWithFormat:@"%li", drinkInfo.drinksID];
+    
+}
+
+
+- (void)sureGuessToServer
+{
+    GuessSureAlertView *alert= [[GuessSureAlertView alloc] initWithGuessArray:self.containerGuessArray];
+    
+    [alert show];
     
 }
 

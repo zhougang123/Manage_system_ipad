@@ -96,11 +96,12 @@
 //登陆按钮点击
 - (void)loginButtonAction{
     
-    
-    
-    
-    
-
+//    GuessSureAlertView *alert = [[GuessSureAlertView alloc] initWithGuessArray: @[@"1111111", @"2222222", @"3333333", @"3452345"]];
+//    [alert show];
+//    
+//    
+//    
+//    return;
     NSLog(@"登陆");
     
     [SVProgressHUD show];
